@@ -1,0 +1,137 @@
+
+<!DOCTYPE html> 
+<html lang="en"> 
+  <head> 
+    <meta charset="UTF-8" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+    <title>Welcome to News Translator</title> 
+    <style> 
+      * { 
+        margin: 0; 
+        padding: 0; 
+        box-sizing: border-box; 
+      } 
+ 
+      body { 
+        font-family: "Arial", sans-serif; 
+        background-color: #121212; 
+        display: flex; 
+        justify-content: center; 
+        align-items: center; 
+        min-height: 100vh; 
+        color: #ffffff; 
+      } 
+ 
+      .container { 
+        text-align: center; 
+        background-color: #1e1e1e; 
+        padding: 40px; 
+        border-radius: 15px; 
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.5); 
+        max-width: 800px; 
+        width: 90%; 
+      } 
+ 
+      h1 { 
+        font-size: 3em; 
+        margin-bottom: 20px; 
+       background: linear-gradient(45deg, #00ffff, #ff00ff); 
+        -webkit-background-clip: text; 
+        background-clip: text; 
+        color: transparent; 
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); 
+      } 
+ 
+      .subtitle { 
+        color: #a0a0a0; 
+        font-size: 1.2em; 
+        margin-bottom: 40px; 
+      } 
+ 
+      .start-button { 
+        background: linear-gradient(45deg, #00ffff, #ff00ff); 
+        color: #ffffff; 
+        padding: 15px 40px; 
+        text-decoration: none; 
+        border-radius: 30px; 
+        font-size: 1.1em; 
+        font-weight: bold; 
+        transition: all 0.3s ease; 
+        display: inline-block; 
+        text-transform: uppercase; 
+        letter-spacing: 1px; 
+      } 
+ 
+      .start-button:hover { 
+        transform: translateY(-3px); 
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.5), 
+          0 0 20px rgba(255, 0, 255, 0.5); 
+      } 
+ 
+      .features { 
+        margin-top: 40px; 
+        display: grid; 
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+        gap: 20px; 
+        padding: 20px; 
+      } 
+ 
+      .feature-card { 
+        background-color: #2d2d2d; 
+        padding: 20px; 
+        border-radius: 10px; 
+        transition: transform 0.3s ease; 
+      } 
+ 
+      .feature-card:hover { 
+        transform: translateY(-5px); 
+      } 
+ 
+      .feature-card h3 { 
+        color: #00ffff; 
+        margin-bottom: 10px; 
+      } 
+ 
+      .feature-card p { 
+        color: #a0a0a0; 
+        font-size: 0.9em; 
+      } 
+ 
+      @media (max-width: 768px) { 
+        h1 { 
+          font-size: 2em; 
+        } 
+ 
+        .container { 
+          padding: 20px; 
+        } 
+ 
+        .features { 
+          grid-template-columns: 1fr; 
+        } 
+      } 
+    </style> 
+  </head> 
+  <body> 
+    <div class="container"> 
+      <h1>Welcome to News Translator</h1> 
+      <p class="subtitle">Breaking Language Barriers in Global News</p> 
+      <a href="/index" class="start-button">Get Started</a> 
+ 
+      <div class="features"> 
+        <div class="feature-card"> 
+          <h3>Real-time Translation</h3> 
+          <p>Instant translation of news articles in multiple languages</p> 
+        </div> 
+        <div class="feature-card"> 
+          <h3>Global Coverage</h3> 
+          <p>Access news from around the world in your preferred language</p> 
+        </div> 
+        <div class="feature-card"> 
+          <h3>Easy to Use</h3> 
+          <p>Simple and intuitive interface for seamless translation</p> 
+        </div> 
+      </div> 
+    </div> 
+  </body> 
+</html>

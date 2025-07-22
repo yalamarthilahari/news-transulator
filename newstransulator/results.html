@@ -1,0 +1,227 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+  <head> 
+    <meta charset="UTF-8" /> 
+    <title>News Results</title> 
+    <style> 
+      body { 
+        font-family: Arial, sans-serif; 
+        color: white; 
+        background-color: #1a1a1a; 
+        padding: 20px; 
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
+        min-height: 100vh; 
+      } 
+ 
+      h1 { 
+        font-size: 36px; 
+        text-align: center; 
+        color: #ffffff; 
+        background: linear-gradient(45deg, #00ffff, #ff00ff); 
+        -webkit-background-clip: text; 
+        -webkit-text-fill-color: transparent; 
+        margin-bottom: 30px; 
+      } 
+ 
+      #results { 
+        display: flex; 
+        justify-content: center; 
+        align-items: flex-start; 
+        width: 100%; 
+        max-width: 1200px; 
+        padding: 20px 10px; 
+      } 
+      .sentiment-column { 
+        background-color: rgba(255, 255, 255, 0.1); 
+        padding: 20px; 
+        border-radius: 10px; 
+        width: 30%; 
+        max-height: 600px; 
+        overflow-y: auto; 
+        margin: 0 10px; 
+      } 
+ 
+      .sentiment-column::-webkit-scrollbar { 
+        width: 10px; 
+      } 
+ 
+      .sentiment-column::-webkit-scrollbar-thumb { 
+        background: linear-gradient(45deg, #00ffff, #ff00ff); 
+        border-radius: 10px; 
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); 
+      } 
+ 
+      .sentiment-column::-webkit-scrollbar-track { 
+        background: rgba(255, 255, 255, 0.1); 
+        border-radius: 10px; 
+      } 
+ 
+      .sentiment-column h2 { 
+        text-align: center; 
+        color: #ffffff; 
+        padding: 10px; 
+        border-radius: 8px; 
+        font-size: 24px; 
+        margin-bottom: 15px; 
+        background: linear-gradient(45deg, #00ffff, #ff00ff); 
+        text-shadow: none; /* No shadow by default */ 
+        transition: text-shadow 0.3s ease, transform 0.3s ease; 
+      } 
+ 
+      .sentiment-column h2:hover { 
+        text-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 
+          0 0 10px rgba(255, 0, 255, 0.5); /* Add shadow on hover */ 
+        transform: translateY(-2px); 
+      } 
+ 
+      .news-article { 
+        border: 1px solid #333; 
+        padding: 15px; 
+        border-radius: 10px; 
+        margin-bottom: 15px; 
+        background-color: #2e2e2e; 
+        color: #ffffff; 
+      transition: transform 0.3s ease, box-shadow 0.3s ease; 
+      } 
+ 
+      .news-article:hover { 
+        transform: translateY(-2px); 
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 
+          0 0 10px rgba(255, 0, 255, 0.5); 
+      } 
+ 
+      .news-link a { 
+        color: #ffcc00; 
+        font-weight: bold; 
+        text-decoration: none; 
+      } 
+ 
+      .news-link a:hover { 
+        text-decoration: underline; 
+      } 
+ 
+      .news-image { 
+        width: 100%; 
+        height: auto; 
+        border-radius: 10px; 
+        margin-bottom: 10px; 
+      } 
+ 
+      .news-article p { 
+        font-size: 16px; 
+        line-height: 1.5; 
+        color: #cccccc; 
+      } 
+ 
+      /* Speak button styling */ 
+      .speak-button { 
+        background: linear-gradient(45deg, #ff00ff, #00ffff); 
+        color: #ffffff; 
+        padding: 8px 16px; 
+        border: none; 
+        border-radius: 8px; 
+        cursor: pointer; 
+        font-size: 14px; 
+        transition: all 0.3s ease; 
+        display: block; 
+        margin: 10px auto 0; 
+      } 
+ 
+      .speak-button:hover { 
+        transform: translateY(-2px); 
+        box-shadow: 0 0 15px rgba(255, 0, 255, 0.6), 
+          0 0 15px rgba(0, 255, 255, 0.6); 
+      } 
+ 
+      .back-button-container { 
+        display: flex; 
+        justify-content: center; 
+        margin-top: auto; 
+        padding-top: 20px; 
+      } 
+ 
+      .back-button { 
+        background: linear-gradient(45deg, #00ffff, #ff00ff); 
+        color: #ffffff; 
+        padding: 10px 20px; 
+        border: none; 
+        border-radius: 8px; 
+        cursor: pointer; 
+        font-size: 16px; 
+        transition: all 0.3s ease; 
+      } 
+ 
+      .back-button:hover { 
+        transform: translateY(-2px); 
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 
+          0 0 10px rgba(255, 0, 255, 0.5); 
+      } 
+    </style> 
+    <script> 
+      // Function to play text-to-speech using Web Speech API 
+      function playTextToSpeech(text, language) { 
+        const utterance = new SpeechSynthesisUtterance(text); 
+        utterance.lang = language; // Set language for speech synthesis 
+        speechSynthesis.speak(utterance); // Speak the text 
+      } 
+ 
+      document.addEventListener("DOMContentLoaded", function () { 
+        const speakButtons = document.querySelectorAll(".speak-button"); 
+        speakButtons.forEach((button) => { 
+          button.addEventListener("click", function () { 
+            const articleTitle = button.dataset.title; 
+            const articleDescription = button.dataset.description; 
+            const lang = button.dataset.language; 
+ 
+            playTextToSpeech(articleTitle, lang); 
+            setTimeout(() => playTextToSpeech(articleDescription, lang), 3000); 
+          }); 
+        }); 
+      }); 
+    </script> 
+  </head> 
+  <body> 
+   <h1>News Results</h1> 
+    <div id="results"> 
+      {% for sentiment, article_list in articles.items() %} 
+      <div class="sentiment-column {{ sentiment|lower }}"> 
+        <h2>{{ sentiment }} News</h2> 
+        {% for article in article_list %} 
+        <div class="news-article"> 
+          <img 
+            src="{{ article.imageUrl }}" 
+            alt="News Image" 
+            class="news-image" 
+          /> 
+          <h3 class="news-link"> 
+            <a 
+              href="https://translate.google.com/translate?hl={{ language }}&sl=auto&tl={{ 
+language }}&u={{ article.url }}" 
+              target="_blank" 
+              >{{ article.title }}</a 
+            > 
+          </h3> 
+          <p>{{ article.description }}</p> 
+          <button 
+            class="speak-button" 
+            data-title="{{ article.title }}" 
+            data-description="{{ article.description }}" 
+            data-language="{{ language }}" 
+          > 
+            Speak 
+          </button> 
+        </div> 
+        {% endfor %} 
+      </div> 
+      {% endfor %} 
+    </div> 
+ 
+    <div class="back-button-container"> 
+      <button onclick="window.location.href='/'" class="back-button"> 
+        Back to Homepage 
+      </button> 
+    </div> 
+  </body> 
+</html> 

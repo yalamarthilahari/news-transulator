@@ -1,0 +1,303 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+  <head> 
+    <meta charset="UTF-8" /> 
+    <title>News Translator</title> 
+    <link 
+      
+href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swa
+ p" 
+      rel="stylesheet" 
+    /> 
+    <style> 
+      * { 
+        margin: 0; 
+        padding: 0; 
+        box-sizing: border-box; 
+      } 
+ 
+      body { 
+        font-family: "Roboto", sans-serif; 
+        background-color: #121212; 
+        color: #ffffff; 
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
+        min-height: 100vh; 
+        padding: 50px 20px; 
+      } 
+ 
+      .container { 
+        width: 100%; 
+        max-width: 800px; 
+      } 
+ 
+      .heading { 
+        font-size: 3em; 
+        margin-bottom: 20px; 
+        background: linear-gradient(45deg, #00ffff, #ff00ff); 
+        -webkit-background-clip: text; 
+        background-clip: text; 
+        color: transparent; 
+        text-align: center; 
+      } 
+ 
+      .search-bar-container { 
+        background-color: #1e1e1e;
+        padding: 20px; 
+        border-radius: 15px; 
+        margin-top: 20px; 
+        display: flex; 
+        flex-wrap: wrap; 
+        gap: 10px; 
+      } 
+ 
+      .search-bar-container select, 
+      .search-bar-container input, 
+      .search-bar-container button { 
+        padding: 12px; 
+        border: none; 
+        border-radius: 8px; 
+        font-size: 16px; 
+        background-color: #2d2d2d; 
+        color: #ffffff; 
+        outline: none; 
+      } 
+ 
+      .search-bar-container input:focus, 
+      .search-bar-container select:focus { 
+        background-color: #363636; 
+        box-shadow: 0 0 0 2px rgba(0, 255, 255, 0.3); 
+      } 
+ 
+      .search-bar-container select, 
+      .search-bar-container input[type="number"] { 
+        flex: 1; 
+      } 
+ 
+      .search-bar-container input[type="text"] { 
+        flex: 3; 
+      } 
+ 
+      .search-bar-container button { 
+        background: linear-gradient(45deg, #00ffff, #ff00ff); 
+        color: #ffffff; 
+        cursor: pointer; 
+        transition: all 0.3s ease; 
+      } 
+ 
+      .search-bar-container button:hover { 
+        transform: translateY(-3px); 
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.5), 
+          0 0 20px rgba(255, 0, 255, 0.5); 
+      } 
+ 
+      .trending-section { 
+        margin-top: 30px; 
+   background-color: #1e1e1e; 
+        padding: 20px; 
+        border-radius: 15px; 
+      } 
+ 
+      .trending-section h2 { 
+        color: #00ffff; 
+        margin-bottom: 15px; 
+        text-align: center; 
+      } 
+ 
+      .trending-articles { 
+        display: grid; 
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+        gap: 20px; 
+      } 
+ 
+      .trending-article { 
+        background-color: #2d2d2d; 
+        border-radius: 10px; 
+        padding: 15px; 
+        display: flex; 
+        flex-direction: column; 
+        transition: transform 0.3s ease, background-color 0.3s ease; 
+      } 
+ 
+      .trending-article:hover { 
+        transform: translateY(-5px); 
+        background-color: #363636; 
+      } 
+ 
+      .trending-article img { 
+        width: 100%; 
+        height: 150px; 
+        object-fit: cover; 
+        border-radius: 8px; 
+        margin-bottom: 10px; 
+      } 
+ 
+      .trending-article h3 { 
+        font-size: 18px; 
+        margin-bottom: 10px; 
+      } 
+ 
+      .trending-article a { 
+        color: #00ffff; 
+        text-decoration: none; 
+      } 
+ 
+      .trending-article a:hover {
+        text-decoration: underline; 
+      } 
+ 
+      .speak-button { 
+        margin-top: auto; 
+        padding: 10px; 
+        background: linear-gradient(45deg, #00ffff, #ff00ff); 
+        color: #ffffff; 
+        border: none; 
+        border-radius: 5px; 
+        cursor: pointer; 
+        transition: all 0.3s ease; 
+      } 
+ 
+      .speak-button:hover { 
+        transform: translateY(-2px); 
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 
+          0 0 10px rgba(255, 0, 255, 0.5); 
+      } 
+ 
+      .back-button-container { 
+        display: flex; 
+        justify-content: center; 
+        width: 100%; 
+        margin-top: auto; 
+        padding-top: 20px; 
+      } 
+ 
+      .back-button { 
+        background: linear-gradient(45deg, #00ffff, #ff00ff); 
+        color: #ffffff; 
+        padding: 10px 20px; 
+        border: none; 
+        border-radius: 8px; 
+        cursor: pointer; 
+        font-size: 16px; 
+        transition: all 0.3s ease; 
+      } 
+ 
+      .back-button:hover { 
+        transform: translateY(-2px); 
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 0 0 10px rgba(255, 0, 255, 0.5); 
+      } 
+ 
+      @media (max-width: 600px) { 
+        .heading { 
+          font-size: 2em; 
+        } 
+ 
+        .search-bar-container { 
+          flex-direction: column; 
+        } 
+ 
+        .search-bar-container select, 
+        .search-bar-container input, 
+        .search-bar-container button { 
+          width: 100%; 
+        } 
+      } 
+    </style> 
+  </head> 
+  <body> 
+    <div class="container"> 
+      <h1 class="heading">News Translator</h1> 
+ 
+      <form action="/search" method="post" class="search-bar-container"> 
+        <select name="language" id="language" onchange="changeLanguage()"> 
+          <option value="en">English</option> 
+          <option value="es">Spanish</option> 
+          <option value="fr">French</option> 
+          <option value="de">German</option> 
+          <option value="it">Italian</option> 
+          <option value="te">Telugu</option> 
+          <option value="hi">Hindi</option> 
+          <option value="kn">Kannada</option> 
+          <option value="ta">Tamil</option> 
+        </select> 
+        <input 
+          type="text" 
+          name="keyword" 
+          id="keyword" 
+          placeholder="Search news..." 
+          required 
+        /> 
+        <input 
+          type="number" 
+          name="pageSize" 
+          id="pageSize" 
+          placeholder="Articles" 
+          min="1" 
+          value="5" 
+        /> 
+        <button type="submit">Search</button> 
+      </form> 
+ 
+      <div class="trending-section"> 
+        <h2>Trending News</h2> 
+        <div class="trending-articles" id="trendingArticles"> 
+          <!-- Trending articles will be dynamically inserted here --> 
+        </div> 
+     </div> 
+ 
+      <script> 
+        async function loadTrendingArticles(language) { 
+          const trendingContainer = document.getElementById("trendingArticles"); 
+          trendingContainer.innerHTML = ""; // Clear previous content 
+ 
+          try { 
+            const response = await fetch(/trending?language=${language}); 
+            const articles = await response.json(); 
+ 
+            articles.slice(0, 3).forEach((article) => { 
+              const articleElement = document.createElement("div"); 
+              articleElement.className = "trending-article"; 
+              articleElement.innerHTML = ` 
+                <img src="${article.urlToImage}" alt="${article.title}"> 
+                <h3> 
+                  <a href="${article.url}" target="_blank">${article.title}</a> 
+                </h3> 
+                <button class="speak-button" 
+                        data-title="${article.title}" 
+                        data-language="${language}" 
+                        onclick="speakArticle(this)">Speak</button> 
+              `; 
+              trendingContainer.appendChild(articleElement); 
+            }); 
+          } catch (error) { 
+            console.error("Error loading trending articles:", error); 
+          } 
+        } 
+ 
+        function speakArticle(button) { 
+          const title = button.getAttribute('data-title'); 
+          const language = button.getAttribute('data-language'); 
+          const speech = new SpeechSynthesisUtterance(); 
+          speech.text = title; 
+          speech.lang = language === 'en' ? 'en-US' : language; 
+          window.speechSynthesis.speak(speech); 
+        } 
+ 
+        function changeLanguage() { 
+          const language = document.getElementById("language").value; 
+          loadTrendingArticles(language); 
+        } 
+ 
+        document.addEventListener("DOMContentLoaded", () => { 
+          const defaultLanguage = document.getElementById("language").value; 
+          loadTrendingArticles(defaultLanguage); 
+        }); 
+      </script> 
+      <div class="back-button-container"> 
+        <button onclick="window.location.href='/'" class="back-button">Back to 
+Homepage</button> 
+      </div> 
+    </div> 
+  </body> 
+</html> 
